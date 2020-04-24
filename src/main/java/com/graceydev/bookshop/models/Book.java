@@ -2,6 +2,7 @@ package com.graceydev.bookshop.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "book")
@@ -14,16 +15,38 @@ public class Book implements Serializable {
     private String author;
     private String publisher;
     private int stock;
+    private double price;
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Order> orders;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    public Book(String title, String author, String publisher, int stock, Category category) {
+    public Book(String title, String author, String publisher, int stock, Category category, double price ) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.stock = stock;
         this.category = category;
+        this.price = price;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getTitle() {

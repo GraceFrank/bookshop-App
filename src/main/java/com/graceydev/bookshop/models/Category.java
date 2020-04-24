@@ -1,7 +1,6 @@
 package com.graceydev.bookshop.models;
 
 import javax.persistence.*;
-import java.awt.print.Book;
 import java.io.Serializable;
 import java.util.Set;
 
